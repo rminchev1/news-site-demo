@@ -3,11 +3,11 @@ import './footer.css';
 
 const Footer = () => {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" aria-label="ArcXP - Poool footer">
       <div className="footer-inner">
         <div className="footer-left">
-          <div className="brand">poool</div>
-          <p className="muted">© {new Date().getFullYear()} poool — All rights reserved.</p>
+          <div className="brand">ArcXP - Poool (app)</div>
+          <p className="muted">© {new Date().getFullYear()} ArcXP - Poool — All rights reserved.</p>
         </div>
 
         <div className="footer-links">

@@ -3,11 +3,11 @@ import './header.css';
 
 const Header = () => {
   return (
-    <header className="site-header">
+    <header className="site-header" aria-label="ArcXP - Poool header">
       <div className="header-inner">
         <div className="header-left">
-          <div className="logo-mark" />
-          <div className="brand">poool</div>
+          <div className="logo-mark" role="img" aria-label="ArcXP logo" />
+          <div className="brand">ArcXP - Poool (app)</div>
         </div>
 
         <nav className="header-nav">
@@ -19,7 +19,7 @@ const Header = () => {
         </nav>
 
         <div className="header-actions">
-          <input className="search" placeholder="Search stories, topics..." />
+          <input className="search" placeholder="Search stories, topics..." aria-label="Search" />
           <button className="subscribe">Subscribe</button>
         </div>
       </div>

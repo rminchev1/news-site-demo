@@ -12,7 +12,7 @@ export function PooolBadge() {
       display: 'inline-block',
       padding: '4px 8px',
       marginLeft: 8,
-      background: '#282c34',
+      background: '#4f76c5ff',
       color: 'white',
       borderRadius: 4,
       fontSize: 12
