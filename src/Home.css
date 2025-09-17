@@ -38,19 +38,16 @@ body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvet
 }
 
 .card {
-  display: flex;
+  display: block;
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
+  padding: 14px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
-.card-media img {
-  width: 180px;
-  height: 120px;
-  object-fit: cover;
-}
+
 .card-content {
-  padding: 12px 14px;
+  padding: 0;
 }
 .card-title { font-size: 16px; margin: 0 0 8px; }
 .card-excerpt { color: #444; font-size: 14px; margin: 0 0 10px; }
@@ -64,4 +61,3 @@ body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvet
 .featured {
   margin-bottom: 18px;
 }
-.featured img { width: 100%; border-radius: 6px; height: 140px; object-fit: cover }
