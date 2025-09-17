@@ -13,7 +13,7 @@ const ArticleDetail = () => {
     return (
       <div className="app">
         <Header />
-        <main style={{ padding: 24 }}>
+        <main className="article-main">
           <p>Article not found.</p>
           <Link to="/">Back</Link>
         </main>
@@ -22,15 +22,19 @@ const ArticleDetail = () => {
     );
   }
 
+  const paragraphs = article.content.split(/\n\n+/).map((p, i) => p.trim()).filter(Boolean);
+
   return (
     <div className="app">
       <Header />
-      <main style={{ padding: 24 }}>
-        <h1>{article.title}</h1>
-        <div style={{ color: '#888', marginBottom: 12 }}>
-          {article.author} · {article.date}
+      <main className="article-main">
+        <h1 className="article-title">{article.title}</h1>
+        <div className="article-meta">{article.author} · {article.date}</div>
+        <div className="article-body">
+          {paragraphs.map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
         </div>
-        <p style={{ fontSize: 16, lineHeight: 1.6 }}>{article.content}</p>
         <Link to="/">← Back to home</Link>
       </main>
       <Footer />
