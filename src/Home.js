@@ -1,5 +1,7 @@
 import React from 'react';
 import ArticleCard from './components/ArticleCard';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import './Home.css';
 
 const sampleArticles = [
@@ -40,22 +42,7 @@ const sampleArticles = [
 const Home = () => {
 	return (
 		<div className="app">
-			<header className="header">
-				<div className="logo">
-					<div
-						style={{
-							width: 40,
-							height: 40,
-							background: '#282c34',
-							borderRadius: 8,
-						}}
-					></div>
-					<div className="brand">poool</div>
-				</div>
-				<nav className="nav">
-					Home · World · Business · Technology · Culture
-				</nav>
-			</header>
+			<Header />
 
 			<div className="grid">
 				<main>
@@ -85,6 +72,8 @@ const Home = () => {
 					</div>
 				</aside>
 			</div>
+
+			<Footer />
 		</div>
 	);
 };
