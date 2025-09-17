@@ -1,6 +1,6 @@
-# Hello React App
+# poool
 
-This is a simple React application that displays a "Hello World" message.
+A simple React application named `poool`. This project currently includes a news-style homepage showing article titles and excerpts.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ Make sure you have the following installed on your machine:
 2. Navigate into the project directory:
 
    ```
-   cd hello-react-app
+   cd poool
    ```
 
 3. Install the dependencies:
