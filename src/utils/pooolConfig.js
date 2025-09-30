@@ -54,62 +54,33 @@ export const getPooolConfig = (user, isAuthenticated) => {
     };
   }
 
-  // Configuration for non-authenticated users
+  // Configuration for non-authenticated users  
   return {
     ...baseConfig,
     user_is_authenticated: false,
-    scenario: 'anonymous_paywall',
     
-    // Configure 3 free articles for unauthenticated users
-    user: {
-      // Poool will track anonymous users via cookies/localStorage
-      anonymous_user_id: 'anonymous',
-    },
+    // Let Poool's dashboard configuration handle article limits
+    // No need to specify limits here - they're set in Poool dashboard
     
-    // Custom texts and URLs for anonymous users
+    // Custom texts for paywall (when it appears)
     texts: {
       title: "Continue Reading",
       subtitle: "Create a free account to access all premium content",
-      login_button: "Sign In",
+      login_button: "Sign In", 
       signup_button: "Create Free Account",
       subscription_button: "Get Premium Access",
-      
-      // Custom call-to-action messages
-      free_articles_remaining: "free articles remaining",
-      free_articles_consumed: "You've used your free articles",
-      value_proposition: "Sign up for unlimited access to premium content",
     },
     
     // Custom URLs for Poool buttons
     urls: {
       login: '/login',
-      signup: '/register',
-      subscription: '/register', // Sign up for premium access
+      signup: '/register', 
+      subscription: '/register',
     },
     
-    // Paywall behavior for anonymous users
+    // Basic paywall configuration - let dashboard control limits and behavior
     paywall: {
-      // Show partial content before paywall
-      free_content_percentage: 40, // Show 40% of content for free
-      
-      // Configure free articles limit
-      free_articles_limit: 3, // Allow 3 free articles
-      
-      // Paywall positioning
-      position: 'middle', // 'top', 'middle', 'bottom'
-      
-      // Allow social sharing before paywall
       enable_social_sharing: true,
-      
-      // Track article views for free article counting
-      track_article_views: true,
-    },
-    
-    // Premium access configuration
-    premium_access: {
-      // What authenticated users get
-      unlimited_articles: true,
-      full_content_access: true,
     },
   };
 };
@@ -122,7 +93,7 @@ export const getPooolConfig = (user, isAuthenticated) => {
  */
 export const getPooolScenario = (user, isAuthenticated) => {
   if (!isAuthenticated) {
-    return 'anonymous_3_free_articles';
+    return 'anonymous_paywall';
   }
   
   // All authenticated users get premium access regardless of subscription status
@@ -195,6 +166,21 @@ export const PooolEventHandlers = {
   onContentUnlock: (data) => {
     console.log('Content unlocked:', data);
     // Analytics tracking
+  },
+  
+  // Handle meter state changes (article counting)
+  onMeterUpdate: (data) => {
+    console.log('Meter updated:', data);
+    // Dispatch custom event for our counter component
+    window.dispatchEvent(new CustomEvent('poool:meter', {
+      detail: { type: 'meter_state', data }
+    }));
+  },
+  
+  // Handle article view events
+  onArticleView: (data) => {
+    console.log('Article viewed:', data);
+    // Let Poool handle all counting - no local tracking needed
   },
 };
 

@@ -10,7 +10,7 @@ const SubscriptionStatus = () => {
       <div className="subscription-status">
         <div className="subscription-banner">
           <span className="subscription-text">
-            📰 3 free articles, then sign up for unlimited access
+            📰 Limited free articles, then sign up for unlimited access
           </span>
           <Link to="/register" className="subscription-cta">
             Sign Up Free

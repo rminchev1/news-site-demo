@@ -72,7 +72,7 @@ const ArticleDetail = () => {
     <div className="app">
       <Header />
       <SubscriptionStatus />
-      <FreeArticleCounter articleId={article.id} isAuthenticated={isAuthenticated} />
+      <FreeArticleCounter isAuthenticated={isAuthenticated} />
 
       {/* poool integration: conditionally apply paywall based on user status */}
       {!showPaywall ? (
@@ -126,6 +126,8 @@ const ArticleDetail = () => {
           config={pooolConfig}
           withAudit={true}
           events={PooolEventHandlers}
+          articleId={article.id}
+          trackArticleView={true}
         >
           <main className="article-main">
             <div className="article-header">
@@ -153,7 +155,7 @@ const ArticleDetail = () => {
               ) : (
                 <div className="auth-prompt">
                   <Link to="/register" className="auth-link">
-                    Sign up to save articles
+                    Save articles with free account
                   </Link>
                 </div>
               )}
@@ -176,6 +178,8 @@ const ArticleDetail = () => {
               onSignup={PooolEventHandlers.onSignup}
               onPaywallDisplay={PooolEventHandlers.onPaywallDisplay}
               onContentUnlock={PooolEventHandlers.onContentUnlock}
+              onMeterUpdate={PooolEventHandlers.onMeterUpdate}
+              onArticleView={PooolEventHandlers.onArticleView}
             />
             <Pixel type="page-view" data={{ type: 'premium', articleId: article.id }} />
 
