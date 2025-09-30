@@ -1,8 +1,97 @@
-# News Site Demo with Authentication
+# 📰 News Site Demo
 
-A full-stack news website built with React frontend and Node.js backend, featuring user authentication, article management, and paywall integration with Poool.
+A modern, full-stack news application built with React and Node.js, featuring user authentication, premium content access, and integrated paywall functionality.
 
-## 📋 Table of Contents
+## 📸 Product Screenshots
+
+<!-- Add your product screenshots here -->
+<!-- Example: -->
+<!-- ![Home Page](./screenshots/home.png) -->
+<!-- ![Authentication](./screenshots/auth.png) -->
+<!-- ![Article View](./screenshots/article.png) -->
+<!-- ![User Profile](./screenshots/profile.png) -->
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** (v16 or higher)
+- **npm** or **yarn**
+- **MongoDB** (optional - uses in-memory storage as fallback)
+
+### Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/radominchev/news-site-demo.git
+   cd news-site-demo
+   ```
+
+2. **Install dependencies**
+   ```bash
+   # Install all dependencies (frontend + backend)
+   npm install
+   
+   # Or install separately
+   npm install                    # Frontend dependencies
+   cd backend && npm install      # Backend dependencies
+   ```
+
+3. **Environment Configuration**
+   
+   Create `.env` file in the root directory:
+   ```env
+   # Server Configuration
+   PORT=5001
+   NODE_ENV=development
+   
+   # Database (Optional - uses in-memory storage if not configured)
+   MONGODB_URI=mongodb://localhost:27017/newssite
+   
+   # JWT Secret (Generate a secure random string)
+   JWT_SECRET=your-super-secure-jwt-secret-key-here
+   
+   # Poool Configuration
+   REACT_APP_POOOL_APP_ID=your-poool-app-id
+   ```
+
+4. **Start the application**
+   ```bash
+   # Development mode (starts both frontend and backend)
+   npm run dev
+   
+   # Or start separately
+   npm start                      # Frontend (http://localhost:3000)
+   cd backend && npm start        # Backend (http://localhost:5001)
+   ```
+
+5. **Access the application**
+   - **Frontend**: http://localhost:3000
+   - **Backend API**: http://localhost:5001
+   - **API Documentation**: http://localhost:5001/api-docs (if available)
+
+### Production Deployment
+
+#### Using Docker
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+
+# Or build manually
+docker build -t news-site-demo .
+docker run -p 3000:3000 -p 5001:5001 news-site-demo
+```
+
+#### Manual Deployment
+```bash
+# Build for production
+npm run build
+
+# Start production server
+NODE_ENV=production npm run start:prod
+```
+
+## 🌟 Features
 
 - [Architecture Overview](#-architecture-overview)
 - [System Architecture](#-system-architecture)
@@ -827,138 +916,41 @@ graph TB
 
 ## 🛠️ Tech Stack
 
-### Frontend Stack
-| Technology | Version | Purpose | Configuration |
-|------------|---------|---------|---------------|
-| **React** | 18.x | UI Library | `create-react-app` with custom config |
-| **React Router DOM** | 6.x | Client-side routing | Hash/Browser routing |
-| **Axios** | 1.x | HTTP client | Interceptors for auth headers |
-| **Poool React Access** | 4.1.5+ | Paywall integration | AccessContext + RestrictedContent |
-| **CSS3** | - | Styling | Responsive design + CSS Grid/Flexbox |
+**Frontend**: React 18, React Router, Axios, Poool React Access  
+**Backend**: Node.js, Express.js, JWT Authentication, bcrypt  
+**Database**: MongoDB with in-memory fallback  
+**Development**: Docker, ESLint, Prettier, Jest
 
-### Backend Stack
-| Technology | Version | Purpose | Configuration |
-|------------|---------|---------|---------------|
-| **Node.js** | 18.x+ | Runtime environment | ES6+ with modern features |
-| **Express.js** | 4.x | Web framework | RESTful API with middleware |
-| **MongoDB** | 5.x+ | Primary database | Replica set recommended |
-| **Mongoose** | 7.x | ODM for MongoDB | Schema validation + middleware |
-| **JWT** | 9.x | Authentication tokens | RS256 algorithm |
-| **bcryptjs** | 2.x | Password hashing | 12 rounds (configurable) |
+## � Configuration
 
-### Security & Middleware
-| Technology | Purpose | Implementation |
-|------------|---------|----------------|
-| **Helmet** | Security headers | CSP, HSTS, XSS protection |
-| **CORS** | Cross-origin requests | Configurable origins |
-| **express-validator** | Input validation | Schema-based validation |
-| **express-rate-limit** | Rate limiting | Sliding window algorithm |
+### Poool Integration Setup
 
-### Development Tools
-| Tool | Purpose | Configuration |
-|------|---------|---------------|
-| **nodemon** | Dev server auto-reload | Watch files + ignore patterns |
-| **concurrently** | Run multiple processes | Frontend + Backend parallel |
-| **ESLint** | Code linting | Airbnb style guide |
-| **Prettier** | Code formatting | Auto-format on save |
+1. **Create Poool Account**: Sign up at [Poool Dashboard](https://dashboard.poool.fr)
+2. **Get App ID**: Copy your App ID from the dashboard
+3. **Configure Environment**: Add `REACT_APP_POOOL_APP_ID` to your `.env` file
+4. **Set Paywall Rules**: Configure article limits and access rules in Poool dashboard
 
-## 📁 Project Structure
+### Authentication Configuration
 
-```
-news-site-demo/
-├── 📁 backend/                          # Node.js/Express backend
-│   ├── 📁 middleware/                   # Custom middleware
-│   │   ├── auth.js                      # JWT authentication
-│   │   └── validation.js                # Input validation
-│   ├── 📁 models/                       # Data models
-│   │   ├── User.js                      # MongoDB user model
-│   │   ├── InMemoryUser.js              # Fallback storage
-│   │   └── UserAdapter.js               # Unified interface
-│   ├── 📁 routes/                       # API route definitions
-│   │   ├── auth.js                      # Authentication routes
-│   │   └── users.js                     # User management routes
-│   ├── 📁 config/                       # Configuration files
-│   │   └── database.js                  # Database connection
-│   ├── server.js                        # Express app entry point
-│   ├── package.json                     # Backend dependencies
-│   └── .env                             # Environment variables
-├── 📁 src/                              # React frontend source
-│   ├── 📁 components/                   # Reusable components
-│   │   ├── Header.js                    # Navigation header
-│   │   ├── Footer.js                    # Site footer
-│   │   ├── ArticleCard.js               # Article preview card
-│   │   ├── FreeArticleCounter.js        # Paywall counter
-│   │   └── SubscriptionStatus.js        # User status banner
-│   ├── 📁 pages/                        # Page components
-│   │   ├── Login.js                     # Login form
-│   │   ├── Register.js                  # Registration form
-│   │   ├── Profile.js                   # User profile
-│   │   └── Favorites.js                 # Favorite articles
-│   ├── 📁 context/                      # React Context
-│   │   └── AuthContext.js               # Authentication state
-│   ├── 📁 services/                     # External services
-│   │   └── api.js                       # Axios configuration
-│   ├── 📁 utils/                        # Utility functions
-│   │   └── pooolConfig.js               # Poool configuration
-│   ├── 📁 data/                         # Static data
-│   │   └── articles.js                  # Sample articles
-│   ├── Home.js                          # Homepage component
-│   ├── ArticleDetail.js                 # Article detail page
-│   ├── App.js                           # Root component
-│   ├── index.js                         # React entry point
-│   └── Home.css                         # Global styles
-├── 📁 public/                           # Static assets
-│   ├── index.html                       # HTML template
-│   └── favicon.ico                      # Site icon
-├── package.json                         # Frontend dependencies
-├── .env                                 # Frontend environment
-└── README.md                            # This documentation
+The app uses JWT-based authentication with the following features:
+- **Session Persistence**: Automatic login restoration on page refresh
+- **Secure Storage**: JWT tokens stored in localStorage with expiration
+- **Route Protection**: Private routes for authenticated users only
+- **Password Security**: bcrypt hashing with salt rounds
+
+### Database Options
+
+**MongoDB (Recommended for Production)**
+```env
+MONGODB_URI=mongodb://localhost:27017/newssite
 ```
 
-## ⚡ Performance Considerations
+**In-Memory Storage (Development Fallback)**
+- Automatically used when MongoDB is unavailable
+- Data persists only during application runtime
+- Perfect for development and testing
 
-### Frontend Optimization
-```mermaid
-graph LR
-    subgraph "Bundle Optimization"
-        CODE_SPLIT[Code Splitting]
-        LAZY_LOAD[Lazy Loading]
-        TREE_SHAKE[Tree Shaking]
-    end
-    
-    subgraph "Runtime Optimization"
-        MEMO[React.memo]
-        CALLBACK[useCallback/useMemo]
-        VIRTUAL[Virtual Scrolling]
-    end
-    
-    subgraph "Asset Optimization"
-        IMG_OPT[Image Optimization]
-        CSS_MIN[CSS Minification]
-        GZIP[GZIP Compression]
-    end
-    
-    BUNDLE --> CODE_SPLIT
-    BUNDLE --> LAZY_LOAD  
-    BUNDLE --> TREE_SHAKE
-    
-    RUNTIME --> MEMO
-    RUNTIME --> CALLBACK
-    RUNTIME --> VIRTUAL
-    
-    ASSETS --> IMG_OPT
-    ASSETS --> CSS_MIN
-    ASSETS --> GZIP
-```
-
-### Backend Optimization
-- **Connection Pooling**: MongoDB connection pool (10-100 connections)
-- **Caching Strategy**: In-memory caching for frequently accessed data
-- **Database Indexing**: Compound indexes on email + status
-- **Compression**: GZIP middleware for API responses
-- **Request Optimization**: Pagination, field selection, data aggregation
-
-## 🔍 Monitoring & Logging
+## 🆘 Troubleshooting
 
 ### Application Monitoring Stack
 ```mermaid
@@ -1614,229 +1606,132 @@ app.use((req, res, next) => {
 - Protected routes
 - Environment variable configuration
 
-## 🚀 Future Enhancements
+## � Technical Architecture
 
-### Roadmap
-
-```mermaid
-gantt
-    title Development Roadmap
-    dateFormat  YYYY-MM-DD
-    section Phase 1
-    User Authentication    :done,    auth, 2025-09-01, 2025-09-15
-    Basic UI Components    :done,    ui, 2025-09-10, 2025-09-25
-    Poool Integration     :done,    paywall, 2025-09-20, 2025-09-30
-    section Phase 2
-    Advanced Analytics    :active,  analytics, 2025-10-01, 2025-10-15
-    Mobile App            :         mobile, 2025-10-15, 2025-11-15
-    Advanced Paywall      :         advanced, 2025-10-01, 2025-10-30
-    section Phase 3
-    Multi-language       :          i18n, 2025-11-01, 2025-11-30
-    Admin Dashboard      :          admin, 2025-11-15, 2025-12-15
-    Advanced Security    :          security, 2025-12-01, 2025-12-30
-```
-
-### Planned Features
-
-#### Short-term (Next Sprint)
-- [ ] **Enhanced Analytics**: User behavior tracking and insights
-- [ ] **Mobile Optimization**: PWA capabilities and mobile-first design
-- [ ] **Advanced Caching**: Redis integration for improved performance
-- [ ] **Email Integration**: Newsletter and notification system
-
-#### Medium-term (Next Quarter)
-- [ ] **Multi-language Support**: i18n with dynamic language switching
-- [ ] **Admin Dashboard**: Content management and user administration
-- [ ] **Advanced Paywall**: Subscription tiers and payment integration
-- [ ] **Social Features**: Article sharing and user interactions
-
-#### Long-term (6+ Months)
-- [ ] **Microservices Architecture**: Service decomposition for scalability
-- [ ] **Real-time Features**: WebSocket integration for live updates
-- [ ] **Advanced Security**: OAuth2, 2FA, and enterprise security features
-- [ ] **AI Integration**: Content recommendations and personalization
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these guidelines:
-
-### Development Workflow
-
-1. **Fork & Clone**
-   ```bash
-   git clone https://github.com/yourusername/news-site-demo.git
-   cd news-site-demo
-   ```
-
-2. **Create Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Development Setup**
-   ```bash
-   npm run install:all
-   npm run dev
-   ```
-
-4. **Code Standards**
-   - Follow ESLint configuration
-   - Write tests for new features
-   - Update documentation
-   - Follow conventional commits
-
-5. **Submit Pull Request**
-   - Clear description of changes
-   - Link to related issues
-   - Ensure CI passes
-   - Request review from maintainers
-
-### Code Style Guidelines
-
-#### JavaScript/React
-```javascript
-// Use functional components with hooks
-const MyComponent = ({ prop1, prop2 }) => {
-  const [state, setState] = useState(initialValue);
-  
-  useEffect(() => {
-    // Side effects
-  }, [dependencies]);
-  
-  return (
-    <div className="component-class">
-      {/* JSX content */}
-    </div>
-  );
-};
-
-export default MyComponent;
-```
-
-#### API Design
-```javascript
-// RESTful endpoints with consistent naming
-GET    /api/users          // List users
-GET    /api/users/:id      // Get specific user
-POST   /api/users          // Create user
-PUT    /api/users/:id      // Update user
-DELETE /api/users/:id      // Delete user
-```
-
-### Testing Requirements
-
-- **Unit Tests**: Cover all utility functions and hooks
-- **Component Tests**: Test React components with React Testing Library
-- **Integration Tests**: Test API endpoints with proper mocking
-- **E2E Tests**: Test critical user flows
-
-## 📊 Analytics & Monitoring
-
-### Key Metrics Dashboard
+### System Architecture Overview
 
 ```mermaid
 graph TB
-    subgraph "User Metrics"
-        DAU[Daily Active Users]
-        REG[New Registrations]
-        RET[User Retention]
+    subgraph "Client Layer"
+        BROWSER[Web Browser]
+        MOBILE[Mobile Device]
     end
     
-    subgraph "Content Metrics" 
-        VIEWS[Article Views]
-        ENGAGEMENT[Engagement Rate]
-        FAVORITES[Favorite Actions]
+    subgraph "Frontend Layer"
+        REACT[React App]
+        ROUTER[React Router]
+        AUTH_CTX[Auth Context]
+        POOOL_SDK[Poool SDK]
     end
     
-    subgraph "Business Metrics"
-        CONVERSION[Paywall Conversion]
-        REVENUE[Revenue Tracking]
-        CHURN[User Churn Rate]
+    subgraph "API Layer"
+        EXPRESS[Express Server]
+        AUTH_MW[Auth Middleware]
+        ROUTES[API Routes]
     end
     
-    subgraph "Technical Metrics"
-        UPTIME[System Uptime]
-        RESPONSE[Response Times]
-        ERRORS[Error Rates]
+    subgraph "Data Layer"
+        MONGODB[(MongoDB)]
+        MEMORY[(In-Memory Store)]
     end
     
-    DASHBOARD --> DAU
-    DASHBOARD --> REG
-    DASHBOARD --> RET
-    DASHBOARD --> VIEWS
-    DASHBOARD --> ENGAGEMENT
-    DASHBOARD --> FAVORITES
-    DASHBOARD --> CONVERSION
-    DASHBOARD --> REVENUE
-    DASHBOARD --> CHURN
-    DASHBOARD --> UPTIME
-    DASHBOARD --> RESPONSE
-    DASHBOARD --> ERRORS
+    subgraph "External Services"
+        POOOL_API[Poool API]
+        CDN[Static Assets CDN]
+    end
+    
+    BROWSER --> REACT
+    MOBILE --> REACT
+    
+    REACT --> ROUTER
+    REACT --> AUTH_CTX
+    REACT --> POOOL_SDK
+    
+    REACT --> EXPRESS
+    EXPRESS --> AUTH_MW
+    EXPRESS --> ROUTES
+    
+    ROUTES --> MONGODB
+    ROUTES --> MEMORY
+    
+    POOOL_SDK --> POOOL_API
+    REACT --> CDN
+    
+    class BROWSER,MOBILE client
+    class REACT,ROUTER,AUTH_CTX,POOOL_SDK frontend  
+    class EXPRESS,AUTH_MW,ROUTES api
+    class MONGODB,MEMORY data
+    class POOOL_API,CDN external
 ```
 
-### Monitoring Stack
+### Authentication Flow
 
-| Component | Tool | Purpose |
-|-----------|------|---------|
-| **Application Monitoring** | New Relic / DataDog | Performance monitoring |
-| **Error Tracking** | Sentry | Error reporting and tracking |
-| **Analytics** | Google Analytics | User behavior analysis |
-| **Uptime Monitoring** | Pingdom / StatusPage | Service availability |
-| **Log Aggregation** | ELK Stack | Centralized logging |
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant A as Auth API
+    participant D as Database
+    
+    U->>F: Login Request
+    F->>A: POST /api/auth/login
+    A->>D: Validate Credentials
+    D-->>A: User Data
+    A-->>F: JWT Token
+    F->>F: Store Token (localStorage)
+    F-->>U: Login Success
+    
+    Note over F: Subsequent Requests
+    F->>A: API Request + JWT Header
+    A->>A: Verify JWT Token
+    A-->>F: Protected Resource
+    
+    Note over F: Session Restoration
+    U->>F: Page Refresh
+    F->>F: Check localStorage for token
+    F->>A: Verify token validity
+    A-->>F: User data (if valid)
+    F-->>U: Auto-login
+```
+
+### Database Design
+
+```mermaid
+erDiagram
+    User ||--o{ Article : favorites
+    User {
+        string id PK
+        string email UK
+        string password
+        string name
+        array favorites
+        date createdAt
+        date updatedAt
+    }
+    
+    Article {
+        string id PK
+        string title
+        string content
+        string author
+        date publishedAt
+        boolean isPremium
+        array tags
+    }
+```
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Copyright (c) 2025 News Site Demo
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-## 🆘 Support & Community
-
-### Getting Help
+## 🆘 Support
 
 - 📚 **Documentation**: This README and inline code comments
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/news-site-demo/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/news-site-demo/discussions)
-- 💬 **Community**: Join our [Discord Server](https://discord.gg/your-invite)
-
-### Maintainers
-
-- **Lead Developer**: [@yourusername](https://github.com/yourusername)
-- **Backend Specialist**: [@backend-dev](https://github.com/backend-dev)
-- **Frontend Specialist**: [@frontend-dev](https://github.com/frontend-dev)
-
-### Acknowledgments
-
-- **Poool**: For paywall integration capabilities
-- **React Team**: For the amazing React framework
-- **Express.js**: For the robust backend framework
-- **MongoDB**: For reliable database solutions
-- **Community Contributors**: All developers who have contributed to this project
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/radominchev/news-site-demo/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/radominchev/news-site-demo/discussions)
 
 ---
 
-**Built with ❤️ using modern web technologies**
+**Built with ❤️ using React, Node.js, and modern web technologies**
 
-*For the latest updates and releases, please check our [GitHub repository](https://github.com/yourusername/news-site-demo).*
+*For the latest updates and releases, please check our [GitHub repository](https://github.com/radominchev/news-site-demo).*
