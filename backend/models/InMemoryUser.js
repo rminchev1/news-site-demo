@@ -48,12 +48,8 @@ class InMemoryUserStore {
       return user;
     };
 
-    // Add virtual properties
-    Object.defineProperty(user, 'fullName', {
-      get: function() {
-        return `${this.firstName} ${this.lastName}`;
-      }
-    });
+    // Add virtual properties (only if they don't already exist)
+    this.addVirtualProperties(user);
 
     this.users.set(id, user);
     return user;
@@ -81,6 +77,18 @@ class InMemoryUserStore {
 
   async comparePassword(candidatePassword, hashedPassword) {
     return await bcrypt.compare(candidatePassword, hashedPassword);
+  }
+
+  // Helper method to safely add virtual properties
+  addVirtualProperties(user) {
+    if (!user.hasOwnProperty('fullName') && !Object.getOwnPropertyDescriptor(user, 'fullName')) {
+      Object.defineProperty(user, 'fullName', {
+        get: function() {
+          return `${this.firstName || ''} ${this.lastName || ''}`.trim();
+        },
+        configurable: true
+      });
+    }
   }
 
   // Helper methods to match Mongoose API
@@ -124,12 +132,8 @@ const InMemoryUser = {
       return await inMemoryStore.updateById(this._id, this);
     };
 
-    // Add virtual properties
-    Object.defineProperty(user, 'fullName', {
-      get: function() {
-        return `${this.firstName} ${this.lastName}`;
-      }
-    });
+    // Add virtual properties safely
+    inMemoryStore.addVirtualProperties(user);
 
     return user;
   },
