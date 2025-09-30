@@ -1,13 +1,16 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
-// Initial state
-const initialState = {
-  user: null,
-  token: localStorage.getItem('authToken'),
-  isLoading: true,
-  isAuthenticated: false,
-  error: null,
+// Initial state function to avoid localStorage access during module load
+const getInitialState = () => {
+  // Don't access localStorage during module initialization
+  // to avoid SSR issues - let useEffect handle auth restoration
+  return {
+    user: null,
+    token: null,
+    isAuthenticated: false,
+    isLoading: true,
+  };
 };
 
 // Action types
@@ -89,40 +92,63 @@ const AuthContext = createContext();
 
 // Auth Provider Component
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, getInitialState());
 
   // Check if user is logged in on app start
   useEffect(() => {
     const checkAuthStatus = async () => {
+      console.log('🔍 Checking auth status on app load...');
       const token = localStorage.getItem('authToken');
       const savedUser = localStorage.getItem('user');
       
+      console.log('📱 Token exists:', !!token);
+      console.log('👤 Saved user exists:', !!savedUser);
+      
       if (token && savedUser) {
         try {
-          // Verify token with backend
-          const response = await authAPI.verifyToken();
+          // Parse the saved user data
+          const parsedUser = JSON.parse(savedUser);
+          console.log('✅ Parsed saved user:', parsedUser);
           
-          if (response.data.success) {
-            dispatch({
-              type: ActionTypes.AUTH_SUCCESS,
-              payload: {
-                user: response.data.user,
-                token: token,
-              },
-            });
-          } else {
-            // Token is invalid
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('user');
-            dispatch({ type: ActionTypes.LOGOUT });
+          // Try to verify token with backend (but don't fail if backend is down)
+          try {
+            const response = await authAPI.verifyToken();
+            console.log('🔐 Token verification response:', response.data);
+            
+            if (response.data.success) {
+              console.log('✅ Token verified, restoring session with backend data');
+              dispatch({
+                type: ActionTypes.AUTH_SUCCESS,
+                payload: {
+                  user: response.data.user,
+                  token: token,
+                },
+              });
+              return;
+            }
+          } catch (apiError) {
+            console.warn('⚠️ Backend unavailable for token verification:', apiError.message);
           }
-        } catch (error) {
-          // Token verification failed
+          
+          // Use saved user data (works offline or when backend is down)
+          console.log('📦 Using saved user data for session restore');
+          dispatch({
+            type: ActionTypes.AUTH_SUCCESS,
+            payload: {
+              user: parsedUser,
+              token: token,
+            },
+          });
+          
+        } catch (parseError) {
+          console.error('❌ Failed to parse saved user data:', parseError);
+          // Saved user data is corrupted
           localStorage.removeItem('authToken');
           localStorage.removeItem('user');
           dispatch({ type: ActionTypes.LOGOUT });
         }
       } else {
+        console.log('❌ No valid token/user found, staying logged out');
         dispatch({ type: ActionTypes.SET_LOADING, payload: false });
       }
     };
