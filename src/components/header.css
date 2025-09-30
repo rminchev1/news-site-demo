@@ -1,1 +1,24 @@
-:root{--site-header-height:72px}.site-header{background:#fff;border-bottom:1px solid #eee;margin-bottom:24px;position:sticky;top:0;z-index:50;box-shadow:0 6px 18px rgba(15,23,42,0.04);height:var(--site-header-height);box-sizing:border-box}.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 24px;height:100%}.header-left{display:flex;align-items:center;gap:12px}.logo-mark{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#28c76f 0%,#00a86b 50%,#007a4d 100%);box-shadow:0 4px 12px rgba(0,50,20,0.12);flex-shrink:0}.brand{font-weight:700;font-size:20px;color:#111}.header-nav a{margin:0 10px;color:#444;text-decoration:none;font-size:14px}.header-actions{display:flex;align-items:center;gap:10px}.search{padding:8px 10px;border-radius:6px;border:1px solid #e6e6e6}.subscribe{background:#111;color:#fff;padding:8px 12px;border-radius:6px;border:0}
+:root{--site-header-height:72px}.site-header{background:#fff;border-bottom:1px solid #eee;margin-bottom:24px;position:sticky;top:0;z-index:50;box-shadow:0 6px 18px rgba(15,23,42,0.04);height:var(--site-header-height);box-sizing:border-box}.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 24px;height:100%}.header-left{display:flex;align-items:center;gap:12px}.logo-mark{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#28c76f 0%,#00a86b 50%,#007a4d 100%);box-shadow:0 4px 12px rgba(0,50,20,0.12);flex-shrink:0}.brand{font-weight:700;font-size:20px;color:#111}.header-nav a,.header-nav .nav-link{margin:0 10px;color:#444;text-decoration:none;font-size:14px;background:none;border:none;cursor:pointer;padding:4px 0;transition:color 0.2s ease}.header-nav a:hover,.header-nav .nav-link:hover{color:#111}.header-actions{display:flex;align-items:center;gap:10px}.search{padding:8px 10px;border-radius:6px;border:1px solid #e6e6e6}.subscribe{background:#111;color:#fff;padding:8px 12px;border-radius:6px;border:0;text-decoration:none;display:inline-block;font-size:14px;font-weight:500;transition:background-color 0.2s ease}.subscribe:hover{background:#333}.login-button{color:#444;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px;transition:all 0.2s ease;background:#f8f9fa;border:1px solid #e6e6e6}.login-button:hover{background:#e9ecef;color:#111}.auth-buttons{display:flex;align-items:center;gap:8px}
+
+/* User Menu Styles */
+.user-menu-container{position:relative}.user-menu-trigger{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:8px;transition:background-color 0.2s ease;color:#444}.user-menu-trigger:hover{background:#f8f9fa}.user-avatar{width:32px;height:32px;border-radius:50%;background:#3b82f6;color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}.user-name{font-size:14px;font-weight:500}.chevron{transition:transform 0.2s ease}.user-menu-container .user-menu-trigger:hover .chevron{transform:rotate(180deg)}.user-menu{position:absolute;top:100%;right:0;margin-top:8px;background:white;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.15);min-width:240px;z-index:1000;overflow:hidden}.user-menu-header{padding:16px}.user-info .user-name-full{font-weight:600;color:#111;margin-bottom:4px}.user-info .user-email{font-size:13px;color:#666}.user-menu-divider{height:1px;background:#e5e7eb}.user-menu-items{padding:8px 0}.user-menu-item{display:flex;align-items:center;width:100%;padding:12px 16px;background:none;border:none;text-align:left;cursor:pointer;text-decoration:none;color:#374151;font-size:14px;transition:background-color 0.15s ease}.user-menu-item:hover{background:#f3f4f6}.user-menu-item.logout{color:#dc2626}.user-menu-item.logout:hover{background:#fef2f2}.user-menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:999}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+  
+  .search {
+    display: none;
+  }
+  
+  .user-name {
+    display: none;
+  }
+  
+  .auth-buttons .login-button {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}

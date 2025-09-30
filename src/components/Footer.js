@@ -11,10 +11,10 @@ const Footer = () => {
         </div>
 
         <div className="footer-links">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+          <button className="footer-link">About</button>
+          <button className="footer-link">Contact</button>
+          <button className="footer-link">Privacy</button>
+          <button className="footer-link">Terms</button>
         </div>
       </div>
     </footer>
