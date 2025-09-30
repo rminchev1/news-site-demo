@@ -22,7 +22,7 @@ const FreeArticleCounter = ({ articleId, isAuthenticated }) => {
               Sign up for unlimited access to all premium content
             </div>
           </div>
-          <Link to="/login" className="counter-cta primary">
+          <Link to="/register" className="counter-cta primary">
             Sign Up Free
           </Link>
         </div>
@@ -41,7 +41,7 @@ const FreeArticleCounter = ({ articleId, isAuthenticated }) => {
               Sign up now for unlimited access after this article
             </div>
           </div>
-          <Link to="/login" className="counter-cta secondary">
+          <Link to="/register" className="counter-cta secondary">
             Sign Up Free
           </Link>
         </div>
@@ -67,7 +67,7 @@ const FreeArticleCounter = ({ articleId, isAuthenticated }) => {
             style={{ width: `${stats.percentage}%` }}
           />
         </div>
-        <Link to="/login" className="counter-cta tertiary">
+        <Link to="/register" className="counter-cta tertiary">
           Sign Up
         </Link>
       </div>

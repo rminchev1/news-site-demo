@@ -152,8 +152,8 @@ const ArticleDetail = () => {
                 </button>
               ) : (
                 <div className="auth-prompt">
-                  <Link to="/login" className="auth-link">
-                    Sign in to save articles
+                  <Link to="/register" className="auth-link">
+                    Sign up to save articles
                   </Link>
                 </div>
               )}
@@ -173,6 +173,7 @@ const ArticleDetail = () => {
               contentRef={contentRef}
               onSubscribe={PooolEventHandlers.onSubscribe}
               onLogin={PooolEventHandlers.onLogin}
+              onSignup={PooolEventHandlers.onSignup}
               onPaywallDisplay={PooolEventHandlers.onPaywallDisplay}
               onContentUnlock={PooolEventHandlers.onContentUnlock}
             />

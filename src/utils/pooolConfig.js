@@ -66,7 +66,7 @@ export const getPooolConfig = (user, isAuthenticated) => {
       anonymous_user_id: 'anonymous',
     },
     
-    // Custom texts for anonymous users
+    // Custom texts and URLs for anonymous users
     texts: {
       title: "Continue Reading",
       subtitle: "Create a free account to access all premium content",
@@ -78,6 +78,13 @@ export const getPooolConfig = (user, isAuthenticated) => {
       free_articles_remaining: "free articles remaining",
       free_articles_consumed: "You've used your free articles",
       value_proposition: "Sign up for unlimited access to premium content",
+    },
+    
+    // Custom URLs for Poool buttons
+    urls: {
+      login: '/login',
+      signup: '/register',
+      subscription: '/register', // Sign up for premium access
     },
     
     // Paywall behavior for anonymous users
@@ -167,7 +174,15 @@ export const PooolEventHandlers = {
   // Handle successful login through Poool
   onLogin: (data) => {
     console.log('User logged in through Poool:', data);
-    // Handle login, update auth state
+    // Redirect to login page
+    window.location.href = '/login';
+  },
+  
+  // Handle signup click from Poool
+  onSignup: (data) => {
+    console.log('User clicked signup through Poool:', data);
+    // Redirect to register page
+    window.location.href = '/register';
   },
   
   // Handle paywall display
