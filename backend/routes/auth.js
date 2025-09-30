@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User');
+const User = require('../models/UserAdapter');
 
 const router = express.Router();
 
@@ -78,14 +78,12 @@ router.post('/register', [
     }
 
     // Create new user
-    const user = new User({
+    const user = await User.create({
       firstName,
       lastName,
       email,
       password
     });
-
-    await user.save();
 
     // Update last login and send response
     await user.updateLastLogin();
@@ -127,7 +125,7 @@ router.post('/login', [
     const { email, password } = req.body;
 
     // Find user and include password field
-    const user = await User.findByEmail(email).select('+password');
+    const user = await User.findByEmail(email);
     if (!user) {
       return res.status(401).json({
         success: false,

@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User');
+const User = require('../models/UserAdapter');
 const { auth } = require('../middleware/auth');
 
 const router = express.Router();
@@ -10,7 +10,7 @@ const router = express.Router();
 // @access  Private
 router.get('/profile', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).populate('favoriteArticles');
+    const user = await User.findById(req.userId);
     
     if (!user) {
       return res.status(404).json({

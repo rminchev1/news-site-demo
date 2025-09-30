@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
+    // Try to connect to MongoDB
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
     });
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
@@ -26,8 +28,14 @@ const connectDB = async () => {
 
   } catch (error) {
     console.error('❌ MongoDB connection failed:', error.message);
-    process.exit(1);
+    console.log('🔄 Running without MongoDB - using in-memory storage');
+    console.log('⚠️  Data will be lost when server restarts');
+    
+    // Don't exit, continue with in-memory storage
+    return false;
   }
+  
+  return true;
 };
 
 module.exports = connectDB;

@@ -7,10 +7,18 @@ require('dotenv').config();
 const connectDB = require('./config/database');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB (or use in-memory storage if not available)
+let useMongoDb = false;
+connectDB().then((connected) => {
+  useMongoDb = connected !== false;
+}).catch(() => {
+  useMongoDb = false;
+});
+
+// Make database type available to routes
+app.locals.useMongoDb = () => useMongoDb;
 
 // Middleware
 app.use(helmet()); // Security headers
