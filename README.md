@@ -2,6 +2,8 @@
 
 A modern, full-stack news application built with React and Node.js, featuring user authentication, premium content access, and integrated paywall functionality.
 
+> **⚡ AI-Assisted Development**: This project was developed with the assistance of AI tools (GitHub Copilot) to accelerate development, provide code suggestions, and enhance documentation quality.
+
 ## 🏢 Business Overview
 
 This demo showcases a complete digital subscription business model for modern news publishers. The application demonstrates key revenue-generating capabilities and user engagement strategies that drive successful digital media businesses.
@@ -1784,8 +1786,19 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/radominchev/news-site-demo/issues)
 - 💡 **Feature Requests**: [GitHub Discussions](https://github.com/radominchev/news-site-demo/discussions)
 
+## 🤖 AI-Assisted Development
+
+This project was developed with the assistance of AI tools to enhance development speed, code quality, and documentation:
+
+- **GitHub Copilot**: Code suggestions, auto-completion, and refactoring assistance
+- **AI-Powered Documentation**: Enhanced README generation and technical documentation
+- **Code Reviews**: AI-assisted code optimization and best practices implementation
+- **Architecture Design**: AI guidance for system design and implementation patterns
+
+The combination of human expertise and AI assistance enabled rapid development of a production-ready full-stack application with comprehensive features and documentation.
+
 ---
 
-**Built with ❤️ using React, Node.js, and modern web technologies**
+**Built with ❤️ using React, Node.js, modern web technologies, and AI assistance**
 
 *For the latest updates and releases, please check our [GitHub repository](https://github.com/radominchev/news-site-demo).*

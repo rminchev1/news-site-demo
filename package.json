@@ -1,7 +1,8 @@
 {
-  "name": "hello-react-app",
+  "name": "news-site-demo",
   "version": "1.0.0",
   "private": true,
+  "description": "A modern news application with paywall integration - developed with AI assistance (GitHub Copilot)",
   "dependencies": {
     "@poool/react-access": "^4.1.5",
     "axios": "^1.12.2",

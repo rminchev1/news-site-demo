@@ -1,3 +1,10 @@
+/**
+ * News Site Demo - Backend Server
+ * 
+ * This server application was developed with AI assistance (GitHub Copilot)
+ * providing enhanced development speed and code quality improvements.
+ */
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
