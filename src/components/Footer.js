@@ -8,13 +8,14 @@ const Footer = () => {
         <div className="footer-left">
           <div className="brand">ArcXP - Poool (app)</div>
           <p className="muted">© {new Date().getFullYear()} ArcXP - Poool — All rights reserved.</p>
+          <p className="ai-notice">⚡ Developed with AI assistance (GitHub Copilot)</p>
         </div>
 
         <div className="footer-links">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+          <button className="footer-link">About</button>
+          <button className="footer-link">Contact</button>
+          <button className="footer-link">Privacy</button>
+          <button className="footer-link">Terms</button>
         </div>
       </div>
     </footer>

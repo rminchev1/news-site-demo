@@ -1,0 +1,27 @@
+{
+  "name": "news-site-demo-fullstack",
+  "version": "1.0.0",
+  "description": "Full-stack news site with React frontend and Node.js backend",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd . && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend",
+    "build:frontend": "npm run build",
+    "start:backend": "cd backend && npm start",
+    "install:all": "npm install && cd backend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "authentication",
+    "news-site"
+  ],
+  "author": "",
+  "license": "MIT"
+}
