@@ -1,1 +1,102 @@
-.site-footer{background:#fafafa;border-top:1px solid #eee;padding:20px 0;margin-top:28px}.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px}.footer-left .brand{font-weight:700}.muted{color:#666;font-size:13px;margin-top:6px}.ai-notice{color:#888;font-size:11px;margin-top:4px;font-style:italic}.footer-links a,.footer-links .footer-link{margin-left:12px;color:#666;text-decoration:none;font-size:14px;background:none;border:none;cursor:pointer;transition:color 0.2s ease}.footer-links a:hover,.footer-links .footer-link:hover{color:#333}
+.site-footer {
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  padding: 20px 0;
+  margin-top: auto; /* This pushes footer to bottom */
+  width: 100%;
+  position: relative;
+  clear: both;
+  min-height: fit-content;
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-left .brand {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.muted {
+  color: #666;
+  font-size: 13px;
+  margin: 6px 0 2px 0;
+  line-height: 1.4;
+}
+
+.ai-notice {
+  color: #888;
+  font-size: 11px;
+  margin: 4px 0 0 0;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.footer-links a,
+.footer-links .footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.footer-links a:hover,
+.footer-links .footer-link:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .footer-left {
+    min-width: unset;
+    width: 100%;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-inner {
+    padding: 0 16px;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
