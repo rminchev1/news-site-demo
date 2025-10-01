@@ -42,21 +42,27 @@ This demo showcases a complete digital subscription business model for modern ne
 | **Subscription SaaS Demo** | Revenue model implementation | Freemium strategy, conversion tracking |
 | **Developer Portfolio** | Modern web development skills | React, Node.js, MongoDB, JWT authentication |
 
-### 💼 Business Value Proposition
-
-- **Proven Revenue Model**: Implements successful freemium-to-premium conversion strategies
-- **Scalable Architecture**: Built to handle growing user bases and content volumes
-- **Analytics-Ready**: Foundation for tracking key business metrics and KPIs
-- **Integration-Friendly**: Modular design for adding payment processors, CRM systems, and marketing tools
-- **Mobile-First Design**: Optimized for the mobile-dominant media consumption landscape
 
 ## 📸 Product Screenshots
 
 <!-- Add your product screenshots here -->
 <!-- Example: -->
 <!-- ![Home Page](./screenshots/home.png) -->
-<!-- ![Authentication](./screenshots/auth.png) -->
+<img width="1282" height="1009" alt="image" src="https://github.com/user-attachments/assets/e84b37d9-be93-42c5-be4d-d6cadc61522f" />
+
+<!-- Metered conent -->
+
+### Freemium metered content
+<img width="1359" height="1186" alt="image" src="https://github.com/user-attachments/assets/173e7f3b-2fdc-4a5a-8e69-9b8058319ac0" />
+
+
+### Paywall
+<img width="1227" height="1191" alt="image" src="https://github.com/user-attachments/assets/f96d5321-f99a-4d4b-961c-f0f1865700a4" />
+
 <!-- ![Article View](./screenshots/article.png) -->
+### Premium content
+<img width="1318" height="1137" alt="image" src="https://github.com/user-attachments/assets/576e3b41-527b-4a5a-a0bf-1c6fa37b66b6" />
+
 <!-- ![User Profile](./screenshots/profile.png) -->
 
 ## 🚀 Quick Start
